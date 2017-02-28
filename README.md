@@ -1,156 +1,187 @@
-# angular2-webpack
+# Angular QuickStart Source
+[![Build Status][travis-badge]][travis-badge-url]
 
-[![Dependency Status](https://david-dm.org/preboot/angular2-webpack/status.svg)](https://david-dm.org/preboot/angular2-webpack#info=dependencies) [![devDependency Status](https://david-dm.org/preboot/angular2-webpack/dev-status.svg)](https://david-dm.org/preboot/angular2-webpack#info=devDependencies)
-[![Join the chat at https://gitter.im/preboot/angular2-webpack](https://badges.gitter.im/preboot/angular2-webpack.svg)](https://gitter.im/preboot/angular2-webpack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
+the foundation for most of the documentation samples and potentially a good starting point for your application.
 
-**Note: This guide is following the Angular's [Style Guide](http://angular.io/styleguide) so I will be changing conventions here and there eventually. You are free to use your own conventions with this starter.**
-**Note 2: There is no conventions yet for RC5 on the style guide so there will be a future update here for that.**
+It's been extended with testing support so you can start writing tests immediately.
 
-A complete, yet simple, starter for Angular 2 using Webpack.
+**This is not the perfect arrangement for your application. It is not designed for production.
+It exists primarily to get you started quickly with learning and prototyping in Angular**
 
-This seed repo serves as an Angular 2 starter for anyone looking to get up and running with Angular 2 and TypeScript fast. Using [Webpack](http://webpack.github.io/) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
-* Best practices in file and application organization for [Angular 2](https://angular.io/).
-* Ready to go build system using [Webpack](https://webpack.github.io/docs/) for working with [TypeScript](http://www.typescriptlang.org/).
-* Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/).
-* Coverage with [Istanbul](https://github.com/gotwarlost/istanbul)
-* End-to-end Angular 2 code using [Protractor](https://angular.github.io/protractor/).
-* Stylesheets with [SASS](http://sass-lang.com/) (not required, it supports regular css too).
-* Error reported with [TSLint](http://palantir.github.io/tslint/) and [Codelyzer](https://github.com/mgechev/codelyzer).
-* Documentation with [TypeDoc](http://typedoc.org/).
+We are unlikely to accept suggestions about how to grow this QuickStart into something it is not.
+Please keep that in mind before posting issues and PRs.
 
->Warning: Make sure you're using the latest version of Node.js and NPM
+## Updating to a newer version of the Quickstart Repo
 
-[Is Angular 2 Ready Yet?](http://splintercode.github.io/is-angular-2-ready/)
+From time to time the QuickStart will add be enhanced with support for new features or to reflect
+changes to the [official Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html).
 
-### Quick start
+You can update your existing project to an up-to-date QuickStart by following these instructions:
+- Create a new project using the [instructions below](#create-a-new-project-based-on-the-quickstart)
+- Copy the code you have in your project's `main.ts` file onto `src/app/main.ts` in the new project
+- Copy your old `app` folder into `src/app`
+- Delete `src/app/main.ts` if you have one (we now use `src/main.ts` instead)
+- Copy your old `index.html`, `styles.css` and `tsconfig.json` into `src/`
+- Install all your third party dependencies
+- Copy your old `e2e/` folder into `e2e/`
+- Copy over any other files you added to your project
+- Copy your old `.git` folder into your new project's root
 
-> Clone/Download the repo then edit `app.ts` inside [`/src/app/app.component.ts`](/src/app/app.component.ts)
+Now you can continue working on the new project.
 
-```bash
-# clone our repo
-$ git clone https://github.com/preboot/angular2-webpack.git my-app
+## Prerequisites
 
-# change directory to your app
-$ cd my-app
+Node.js and npm are essential to Angular development. 
+    
+<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Installing Node.js and updating npm">
+Get it now</a> if it's not already installed on your machine.
+ 
+**Verify that you are running at least node `v4.x.x` and npm `3.x.x`**
+by running `node -v` and `npm -v` in a terminal/console window.
+Older versions produce errors.
 
-# install the dependencies with npm
-$ npm install
+We recommend [nvm](https://github.com/creationix/nvm) for managing multiple versions of node and npm.
 
-# start the server
-$ npm start
+## Create a new project based on the QuickStart
+
+Clone this repo into new project folder (e.g., `my-proj`).
+```shell
+git clone https://github.com/angular/quickstart  my-proj
+cd my-proj
 ```
-go to [http://localhost:8080](http://localhost:8080) in your browser.
 
-# Table of Contents
+We have no intention of updating the source on `angular/quickstart`.
+Discard the `.git` folder..
+```shell
+rm -rf .git  # OS/X (bash)
+rd .git /S/Q # windows
+```
+### Delete _non-essential_ files (optional)
 
-* [Getting Started](#getting-started)
-    * [Dependencies](#dependencies)
-    * [Installing](#installing)
-    * [Developing](#developing)
-    * [Testing](#testing)
-    * [Production](#production)
-    * [Documentation](#documentation)
-* [Frequently asked questions](#faq)
-* [TypeScript](#typescript)
-* [License](#license)
+You can quickly delete the _non-essential_ files that concern testing and QuickStart repository maintenance
+(***including all git-related artifacts*** such as the `.git` folder and `.gitignore`!)
+by entering the following commands while in the project folder:
 
-# Getting Started
+##### OS/X (bash)
+```shell
+xargs rm -rf < non-essential-files.osx.txt
+rm src/app/*.spec*.ts
+rm non-essential-files.osx.txt
+```
 
-## Dependencies
+##### Windows
+```shell
+for /f %i in (non-essential-files.txt) do del %i /F /S /Q
+rd .git /s /q
+rd e2e /s /q
+```
 
-What you need to run this app:
-* `node` and `npm` (Use [NVM](https://github.com/creationix/nvm))
-* Ensure you're running Node (`v5.x.x`+) and NPM (`3.x.x`+)
+### Create a new git repo
+You could [start writing code](#start-development) now and throw it all away when you're done.
+If you'd rather preserve your work under source control, consider taking the following steps.
 
-## Installing
+Initialize this project as a *local git repo* and make the first commit:
+```shell
+git init
+git add .
+git commit -m "Initial commit"
+```
 
-* `fork` this repo
-* `clone` your fork
-* `npm install` to install all dependencies
+>Recover the deleted `.gitignore` from the QuickStart repository 
+if you lost it in the _Delete non-essential files_ step.
 
-## Developing
+Create a *remote repository* for this project on the service of your choice.
 
-After you have installed all dependencies you can now start developing with:
+Grab its address (e.g. *`https://github.com/<my-org>/my-proj.git`*) and push the *local repo* to the *remote*.
+```shell
+git remote add origin <repo-address>
+git push -u origin master
+```
+## Install npm packages
 
-* `npm start`
+> See npm and nvm version notes above
 
-It will start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The application can be checked at `http://localhost:8080`.
+Install the npm packages described in the `package.json` and verify that it works:
 
-As an alternative, you can work using Hot Module Replacement (HMR):
+```shell
+npm install
+npm start
+```
 
-* `npm run start:hmr`
+>Doesn't work in _Bash for Windows_ which does not support servers as of January, 2017.
 
-And you are all set! You can now modify your components on the fly without having to reload the entire page.
+The `npm start` command first compiles the application, 
+then simultaneously re-compiles and runs the `lite-server`.
+Both the compiler and the server watch for file changes.
+
+Shut it down manually with `Ctrl-C`.
+
+You're ready to write your application.
+
+### npm scripts
+
+We've captured many of the most useful commands in npm scripts defined in the `package.json`:
+
+* `npm start` - runs the compiler and a server at the same time, both in "watch mode".
+* `npm run build` - runs the TypeScript compiler once.
+* `npm run build:w` - runs the TypeScript compiler in watch mode; the process keeps running, awaiting changes to TypeScript files and re-compiling when it sees them.
+* `npm run serve` - runs the [lite-server](https://www.npmjs.com/package/lite-server), a light-weight, static file server, written and maintained by
+[John Papa](https://github.com/johnpapa) and
+[Christopher Martin](https://github.com/cgmartin)
+with excellent support for Angular apps that use routing.
+
+Here are the test related scripts:
+* `npm test` - compiles, runs and watches the karma unit tests
+* `npm run e2e` - compiles and run protractor e2e tests, written in Typescript (*e2e-spec.ts)
 
 ## Testing
 
-#### 1. Unit Tests
+The QuickStart documentation doesn't discuss testing.
+This repo adds both karma/jasmine unit test and protractor end-to-end testing support.
 
-* single run: `npm test`
-* live mode (TDD style): `npm run test-watch`
+These tools are configured for specific conventions described below.
 
-#### 2. End-to-End Tests (aka. e2e, integration)
+*It is unwise and rarely possible to run the application, the unit tests, and the e2e tests at the same time.
+We recommend that you shut down one before starting another.*
 
-* single run:
-  * in a tab, *if not already running!*: `npm start`
-  * in a new tab: `npm run webdriver-start`
-  * in another new tab: `npm run e2e`
-* interactive mode:
-  * instead of the last command above, you can run: `npm run e2e-live`
-  * when debugging or first writing test suites, you may find it helpful to try out Protractor commands without starting up the entire test suite. You can do this with the element explorer.
-  * you can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
+### Unit Tests
+TypeScript unit-tests are usually in the `src/app` folder. Their filenames must end in `.spec.ts`.
 
-## Production
+Look for the example `src/app/app.component.spec.ts`.
+Add more `.spec.ts` files as you wish; we configured karma to find them.
 
-To build your application, run:
+Run it with `npm test`
 
-* `npm run build`
+That command first compiles the application, then simultaneously re-compiles and runs the karma test-runner.
+Both the compiler and the karma watch for (different) file changes.
 
-You can now go to `/dist` and deploy that to your server!
+Shut it down manually with `Ctrl-C`.
 
-## Documentation
+Test-runner output appears in the terminal window.
+We can update our app and our tests in real-time, keeping a weather eye on the console for broken tests.
+Karma is occasionally confused and it is often necessary to shut down its browser or even shut the command down (`Ctrl-C`) and
+restart it. No worries; it's pretty quick.
 
-You can generate api docs (using [TypeDoc](http://typedoc.org/)) for your code with the following:
+### End-to-end (E2E) Tests
 
-* `npm run docs`
+E2E tests are in the `e2e` directory, side by side with the `src` folder.
+Their filenames must end in `.e2e-spec.ts`.
 
-# FAQ
+Look for the example `e2e/app.e2e-spec.ts`.
+Add more `.e2e-spec.js` files as you wish (although one usually suffices for small projects);
+we configured Protractor to find them.
 
-#### Do I need to add script / link tags into index.html ?
+Thereafter, run them with `npm run e2e`.
 
-No, Webpack will add all the needed Javascript bundles as script tags and all the CSS files as link tags. The advantage is that you don't need to modify the index.html every time you build your solution to update the hashes.
+That command first compiles, then simultaneously starts the `lite-server` at `localhost:8080`
+and launches Protractor.  
 
-#### How to include external angular 2 libraries ?
+The pass/fail test results appear at the bottom of the terminal window.
+A custom reporter (see `protractor.config.js`) generates a  `./_test-output/protractor-results.txt` file
+which is easier to read; this file is excluded from source control.
 
-It's simple, just install the lib via npm and import it in your code when you need it. Don't forget that you need to configure some external libs in the [bootstrap](https://github.com/preboot/angular2-webpack/blob/master/src/main.ts) of your application.
+Shut it down manually with `Ctrl-C`.
 
-#### How to include external css files such as bootstrap.css ?
-
-Just install the lib and import the css files in [vendor.ts](https://github.com/preboot/angular2-webpack/blob/master/src/vendor.ts). For example this is how to do it with bootstrap:
-
-```sh
-npm install bootstrap@next --save
-```
-
-And in [vendor.ts](https://github.com/preboot/angular2-webpack/blob/master/src/vendor.ts) add the following:
-
-```ts
-import 'bootstrap/dist/css/bootstrap.css';
-```
-
-# TypeScript
-
-> To take full advantage of TypeScript with autocomplete you would have to use an editor with the correct TypeScript plugins.
-
-## Use a TypeScript-aware editor
-
-We have good experience using these editors:
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Webstorm 11+](https://www.jetbrains.com/webstorm/download/)
-* [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
-* [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
-
-# License
-
-[MIT](/LICENSE)
+[travis-badge]: https://travis-ci.org/angular/quickstart.svg?branch=master
+[travis-badge-url]: https://travis-ci.org/angular/quickstart

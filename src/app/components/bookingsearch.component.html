@@ -1,0 +1,36 @@
+<h1>{{title}}</h1>
+<hr/>
+<form>
+    <label>Booking ID: </label>&nbsp;
+    <input #txtBookingId type="text" name="txtBookingId" />&nbsp;
+    <button (click)="loadBooking(txtBookingId.value)">Search</button>
+</form>
+
+<div *ngIf="loadedBooking?.length > 0" >
+    <!--Loaded Booking: <br/> 
+    Booking ID : <label [(ngModel)]="{{loadedBooking.bookingId}}"></label><br/> 
+    Product : <label [(ngModel)]="{{loadedBooking.product}}"></label>><br/>   -->
+
+    <!--<div *ngFor="let item of loadedBooking.bookingItems">
+        &nbsp;&nbsp;&nbsp;&nbsp; Item No :{{item.itemNo}} <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Product Code :{{item.productCode}}
+    </div>-->
+    <br/>
+</div>
+
+<hr/>
+
+<br/>
+
+<div *ngFor="let booking of bookings">
+    <div>
+        Booking ID : {{booking.bookingId}}<br/> 
+        Product : {{booking.product}}<br/>
+
+        <div *ngFor="let item of booking.bookingItems">
+            &nbsp;&nbsp;&nbsp;&nbsp; Item No :{{item.itemNo}} 
+            &nbsp;&nbsp;&nbsp;&nbsp; Product Code :{{item.productCode}}
+        </div>
+        <br/>
+    </div>
+</div>

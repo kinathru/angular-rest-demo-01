@@ -1,59 +1,17 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
-import { InMemoryWebApiModule }     from 'angular-in-memory-web-api';
-
-import { AppComponent } from './app.component';
-
-
-import { ApiService } from './shared';
-import { AppRoutingModule } from './app.routing';
-
-
-import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-
-
-/* Angular 2 HTTP Service EXAMPLE Start*/
-import { CarData }                 from './car-data';
-import { CarListComponent }        from './http-cars/car-list.component';
-import { SassexampleComponent } from './sassexample/sassexample.component';
-/* Angular 2 HTTP Service EXAMPLE End*/
- 
+import { AppComponent }  from './app.component';
+import { UserComponent } from './components/user.component';
+import { AboutComponent } from './components/about.component';
+import { BookingSearchComponent } from './components/bookingsearch.component';
+import { routing } from './app.routing';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    AppRoutingModule,    
-    InMemoryWebApiModule.forRoot(CarData),
-  ],
-  declarations: [
-    AppComponent,    
-    CarListComponent, SassexampleComponent
-  ],
-  providers: [
-    ApiService
-  ],
-  bootstrap: [AppComponent]
+  imports:      [ BrowserModule,FormsModule, HttpModule, routing ],
+  declarations: [ AppComponent, UserComponent, AboutComponent, BookingSearchComponent ],
+  bootstrap:    [ AppComponent ]
 })
-export class AppModule {
-  constructor(public appRef: ApplicationRef) {}
-  hmrOnInit(store) {
-    console.log('HMR store', store);
-  }
-  hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // recreate elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // remove styles
-    removeNgStyles();
-  }
-  hmrAfterDestroy(store) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
-}
+export class AppModule { }

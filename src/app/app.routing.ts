@@ -1,21 +1,23 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-//import { HomeComponent } from './home/home.component';
-//import { AboutComponent } from './about/about.component';
+import {UserComponent} from './components/user.component';
+import {AboutComponent} from './components/about.component';
+import { BookingSearchComponent } from './components/bookingsearch.component';
 
-const routes: Routes = [
-  
-
-   //{ path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: 'about', loadChildren: './about/about.module#AboutModule' }
-    
+const appRoutes : Routes = [
+    {
+        path:'',
+        component: UserComponent
+    },
+    {
+        path:'about',
+        component:AboutComponent
+    },
+    {
+        path:'bookingsearch',
+        component:BookingSearchComponent
+    }
 ];
 
-//export const routing = RouterModule.forRoot(routes);
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule { }
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

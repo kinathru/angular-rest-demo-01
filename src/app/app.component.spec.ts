@@ -1,24 +1,33 @@
-import { TestBed } from '@angular/core/testing';
-import { provideRoutes } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-
-import { ApiService } from './shared';
 import { AppComponent } from './app.component';
 
-describe('App', () => {
-  // provide our implementations or mocks to the dependency injector
-  beforeEach(() => {
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By }           from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
+describe('AppComponent', function () {
+  let de: DebugElement;
+  let comp: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
-      providers: [ApiService, provideRoutes([])]
-    });
+      declarations: [ AppComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    comp = fixture.componentInstance;
+    de = fixture.debugElement.query(By.css('h1'));
   });
 
-  it('should have an url', () => {
-    let fixture = TestBed.createComponent(AppComponent);
+  it('should create component', () => expect(comp).toBeDefined() );
+
+  it('should have expected <h1> text', () => {
     fixture.detectChanges();
-    expect(fixture.debugElement.componentInstance.url).toEqual('https://github.com/preboot/angular2-webpack');
+    const h1 = de.nativeElement;
+    expect(h1.innerText).toMatch(/angular/i,
+      '<h1> should say something about "Angular"');
   });
-
 });
