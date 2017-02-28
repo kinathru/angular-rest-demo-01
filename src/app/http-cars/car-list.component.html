@@ -1,0 +1,11 @@
+<h1>Cars List with Angular 2 HTTP Service ({{mode}})</h1>
+<h3>Cars List:</h3>
+<ul>
+  <li *ngFor="let car of cars">{{car.name}}</li>
+</ul>
+
+<label>New car name: <input #newCarName /></label>
+<button (click)="addCar(newCarName.value); newCarName.value=''">Add Car</button>
+
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
